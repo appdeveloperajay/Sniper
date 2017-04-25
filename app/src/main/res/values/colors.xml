@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#400147</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="WHITE">#EBECEC</color>
+    <color name="BACKGROUND">#300137</color>
+    <color name="ORANGE">#EF7F1A</color>
+    <color name="PINK">#E5097F</color>
+    <color name="HintColor">#5ae5097f</color>
+    <color name="RED">#E5097f</color>
+
+
+</resources>

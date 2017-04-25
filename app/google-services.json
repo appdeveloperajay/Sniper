@@ -1,0 +1,107 @@
+{
+  "project_info": {
+    "project_number": "982102710511",
+    "firebase_url": "https://fir-kharar.firebaseio.com",
+    "project_id": "firebase-kharar",
+    "storage_bucket": "firebase-kharar.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:982102710511:android:be87d8c5d48aa1e6",
+        "android_client_info": {
+          "package_name": "com.example.bhushan.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "982102710511-6updfrf3hebsu5c3fr237d3vefjvotk3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.bhushan.myapplication",
+            "certificate_hash": "ac8effc896f6bd0c2bcd2828206a0189884c60dd"
+          }
+        },
+        {
+          "client_id": "982102710511-6n4mb2mdo2ij0ldlp2f0e999nqjjp9a7.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "982102710511-pss7sr5tuinrt1ajpvv34o4kk302uqfp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCavZgP8CLKP03GA3kWSdUkxcZ7yDfEjXc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "982102710511-6n4mb2mdo2ij0ldlp2f0e999nqjjp9a7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:982102710511:android:48aa1b08f3ecaff2",
+        "android_client_info": {
+          "package_name": "com.eroticsniper"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "982102710511-o0pdnsgi316coqjg4uhtas7kvn57pra1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.eroticsniper",
+            "certificate_hash": "1c247235ec043610f11a731ea582d78bccf7e09e"
+          }
+        },
+        {
+          "client_id": "982102710511-6n4mb2mdo2ij0ldlp2f0e999nqjjp9a7.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "982102710511-pss7sr5tuinrt1ajpvv34o4kk302uqfp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCavZgP8CLKP03GA3kWSdUkxcZ7yDfEjXc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "982102710511-6n4mb2mdo2ij0ldlp2f0e999nqjjp9a7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

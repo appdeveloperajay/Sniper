@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/BACKGROUND"
+    tools:context=".Signin_as_Activity">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="248dp"
+                android:layout_height="180sp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20sp"
+                android:layout_marginRight="20sp"
+                android:src="@drawable/splash_logo" />
+
+
+            <EditText
+                android:id="@+id/edt_Name"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:hint="@string/Name"
+                android:paddingLeft="10sp"
+                android:text=""
+                android:textColor="@color/WHITE"
+                android:textColorHint="@color/HintColor"
+                android:textSize="@dimen/EditTextSize" />
+
+
+            <EditText
+                android:id="@+id/edt_Email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:hint="@string/Email"
+                android:textColor="@color/WHITE"
+                android:paddingLeft="10sp"
+                android:textColorHint="@color/HintColor"
+                android:textSize="@dimen/EditTextSize" />
+
+            <EditText
+                android:id="@+id/edt_Password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:hint="@string/Password"
+                android:paddingLeft="10sp"
+                android:inputType="textPassword"
+                android:textColor="@color/WHITE"
+                android:textColorHint="@color/HintColor"
+                android:textSize="@dimen/EditTextSize" />
+
+            <EditText
+                android:id="@+id/edt_Confirm_Password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:hint="@string/ConfirmPassword"
+                android:paddingLeft="10sp"
+                android:inputType="textPassword"
+                android:textColor="@color/WHITE"
+                android:textColorHint="@color/HintColor"
+                android:textSize="@dimen/EditTextSize" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="10dp"
+                    android:buttonTint="@color/WHITE" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/i_agree_"
+                    android:textColor="@color/WHITE"
+                    android:textSize="@dimen/optionsText" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/Terms_and_Conditions_UnderLine"
+                    android:textColor="@color/WHITE"
+                    android:textSize="@dimen/optionsText" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btn_Next"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@color/PINK"
+                android:text="@string/Register"
+                android:textAllCaps="true"
+                android:textColor="@color/WHITE" />
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>
