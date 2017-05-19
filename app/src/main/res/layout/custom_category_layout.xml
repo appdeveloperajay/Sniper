@@ -20,6 +20,7 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:text="Category"
+            android:textStyle="bold"
             android:textColor="@color/WHITE"
             android:textSize="18dp" />
 

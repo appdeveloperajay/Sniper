@@ -7,5 +7,7 @@ package com.eroticsniper;
 public class Global {
     public static String BaseUrl = "http://eroticsniper.varshipcreations.com/";
     public static String CatId;
+    public static String HaveAdvanceServices;
+
 
 }

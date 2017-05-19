@@ -11,5 +11,12 @@
     <color name="HintColor">#5ae5097f</color>
     <color name="RED">#E5097f</color>
 
-
+    <color name="ToolbarColor">#400147</color>
+    <color name="buttoncolors">#CCC</color>
+    <color name="bagroundcolor">#570161</color>
+    <!--<color name="RED">#ab1b15</color>-->
+    <color name="Transparent">#00FFFFFF</color>
+    <color name="pink">#E5097f</color>
+    <color name="ToolbarViewColor">#8090241F</color>
+    <color name="RatingActivate">#ef7f1a</color>
 </resources>

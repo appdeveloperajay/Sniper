@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_width="match_parent"
+    android:id="@+id/Ll_full_row"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/tv_adv_ser_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="abc"
-        android:layout_margin="10dp"/>
+        android:layout_margin="10dp"
+        android:textColor="@color/WHITE"
+        android:text="abc" />
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1.5dp"
-        android:background="#CCC"/>
+        android:background="#CCC" />
 </LinearLayout>

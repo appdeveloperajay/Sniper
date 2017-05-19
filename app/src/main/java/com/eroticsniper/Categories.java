@@ -29,11 +29,7 @@ public class Categories extends AppCompatActivity {
     String TAG = "Catrgory_Log";
     RecyclerView rv_category;
     CategoryResp category;
-    ArrayList<String> RESCategory = new ArrayList<String>();
-    ArrayList<String> RESCategoryId = new ArrayList<String>();
-    ArrayList<String> Cat_type = new ArrayList<String>();
-    ArrayList<String> Have_services = new ArrayList<String>();
-    ArrayList<String> Have_advanceservices = new ArrayList<String>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,24 +54,16 @@ public class Categories extends AppCompatActivity {
                                public void onResponse(Call<CategoryResp> call, Response<CategoryResp> response) {
                                    if (response != null) {
                                        category = response.body();
-                                       Log.d(TAG, "" + category);
+                                       Log.d(TAG, "category " + category);
 
-                                       if (category != null) {
-                                           for (int i = 0; i < category.getCategory().size(); i++) {
-                                               RESCategory.add(category.getCategory().get(i).getCat_name());
-                                               RESCategoryId.add(category.getCategory().get(i).getCat_id().toString());
-                                               Cat_type.add(category.getCategory().get(i).getCat_type().toString());
-                                               Have_services.add(category.getCategory().get(i).getHave_services().toString());
-                                               Have_advanceservices.add(category.getCategory().get(i).getHave_services().toString());
-                                           }
+                                       Log.d(TAG, "" + category.getCategory().size());
+                                       CategoryAdapter categoryAdapter = new CategoryAdapter(Categories.this, category);
 
-                                           CategoryAdapter categoryAdapter = new CategoryAdapter(Categories.this, RESCategory, RESCategoryId, Cat_type, Have_services, Have_advanceservices);
-                                           rv_category = (RecyclerView) findViewById(R.id.rv_category);
-                                           RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
-                                           rv_category.setLayoutManager(mLayoutManager);
-                                           rv_category.setItemAnimator(new DefaultItemAnimator());
-                                           rv_category.setAdapter(categoryAdapter);
-                                       }
+                                       rv_category = (RecyclerView) findViewById(R.id.rv_category);
+                                       RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+                                       rv_category.setLayoutManager(mLayoutManager);
+                                       rv_category.setItemAnimator(new DefaultItemAnimator());
+                                       rv_category.setAdapter(categoryAdapter);
                                    }
                                }
 
@@ -86,7 +74,6 @@ public class Categories extends AppCompatActivity {
 
                            }
         );
-
 
 
     }

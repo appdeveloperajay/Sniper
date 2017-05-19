@@ -37,6 +37,9 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".MapsActivity" />
         <activity android:name=".Services" />
+        <activity android:name=".Splash"/>
+        <activity android:name=".AdvanceCategory" />
+        <activity android:name=".AddLocaton"/>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -52,7 +55,7 @@
         <!-- <activity -->
         <!-- android:name=".MapsActivity" -->
         <!-- android:label="@string/title_activity_maps"></activity> -->
-        <activity android:name=".AdvanceCategory"></activity>
+
     </application>
 
 </manifest>

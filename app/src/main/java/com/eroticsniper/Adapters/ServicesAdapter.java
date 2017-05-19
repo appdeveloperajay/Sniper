@@ -3,13 +3,18 @@ package com.eroticsniper.Adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.eroticsniper.AddLocaton;
 import com.eroticsniper.AdvanceCategory;
+import com.eroticsniper.Beans.Retroresponse;
+import com.eroticsniper.Global;
 import com.eroticsniper.R;
 
 import java.util.ArrayList;
@@ -19,17 +24,18 @@ import java.util.ArrayList;
  */
 
 public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.MyViewHolder> {
-
-    ArrayList<String> ServiceName;
-    ArrayList<String> ServiceId;
+    String TAG = "SERVICEADAPTER";
     String have_advance_services;
     Context context;
+    String catid;
+    Retroresponse response;
 
-    public ServicesAdapter(Context con, ArrayList<String> ServiceId, ArrayList<String> ServiceName, String HaveAdvanceServices) {
-        this.ServiceName = ServiceName;
-        this.ServiceId = ServiceId;
-        this.have_advance_services = HaveAdvanceServices;
+    public ServicesAdapter(Context con, Retroresponse response1, String catId, String have_advance_services) {
+        this.catid = catId;
+        this.response = response1;
+        this.have_advance_services = have_advance_services;
         this.context = con;
+        Log.d(TAG, "have_advance_services:- " + have_advance_services);
     }
 
     @Override
@@ -43,12 +49,15 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.MyView
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
 
-        holder.txt_category.setText(ServiceName.get(position));
+        holder.txt_category.setText(response.getServices().get(position).getService_name());
         holder.RL_service.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (Integer.parseInt(have_advance_services) == 1) {
                     Intent i = new Intent().setClass(context, AdvanceCategory.class);
+                    context.startActivity(i);
+                } else {
+                    Intent i = new Intent().setClass(context, AddLocaton.class);
                     context.startActivity(i);
                 }
             }
@@ -57,7 +66,7 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.MyView
 
     @Override
     public int getItemCount() {
-        return ServiceName.size();
+        return response.getServices().size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {

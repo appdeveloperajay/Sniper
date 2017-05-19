@@ -25,12 +25,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class Services extends AppCompatActivity {
-
+    String TAG = "Service_details";
     RecyclerView rv_service;
     String CatId = "0";
     String have_advance_services;
-    ArrayList<String> ServicesName = new ArrayList<String>();
-    ArrayList<String> ServiceId = new ArrayList<String>();
+
     Retroresponse response1;
 
     @Override
@@ -38,14 +37,14 @@ public class Services extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_services);
         rv_service = (RecyclerView) findViewById(R.id.rv_service);
-        Intent i = new Intent();
-        CatId = i.getStringExtra("CID");
-        have_advance_services = i.getStringExtra("adv_service");
-        Toast.makeText(Services.this, "a1" +have_advance_services, Toast.LENGTH_SHORT).show();
-        Toast.makeText(this, "", Toast.LENGTH_SHORT).show();
+
+        CatId = Global.CatId;
+        have_advance_services = Global.HaveAdvanceServices;
+
+        Log.d(TAG, "CatId:-" + CatId);
+        Log.d(TAG, "have_advance_services:-" + have_advance_services);
 
         retrofit();
-
     }
 
     public void retrofit() {
@@ -53,24 +52,20 @@ public class Services extends AppCompatActivity {
         OkHttpClient client = new OkHttpClient.Builder().connectTimeout(60, TimeUnit.SECONDS).readTimeout(60, TimeUnit.SECONDS).writeTimeout(60, TimeUnit.SECONDS).build();
         Retrofit retrofit = new Retrofit.Builder().baseUrl(Global.BaseUrl).client(client).addConverterFactory(GsonConverterFactory.create(gson)).addConverterFactory(ScalarsConverterFactory.create()).build();
         RetroInterface retroInterface = retrofit.create(RetroInterface.class);
-        Call<Retroresponse> call = retroInterface.getResponse("12");
+        Call<Retroresponse> call = retroInterface.getResponse(CatId);
+
         call.enqueue(new Callback<Retroresponse>() {
             @Override
             public void onResponse(Call<Retroresponse> call, retrofit2.Response<Retroresponse> response) {
                 response1 = response.body();
-                if (response1 != null) {
-                    for (int i = 0; i < response1.getServices().size(); i++) {
-                        ServiceId.add(response1.getServices().get(i).getService_id());
-                        ServicesName.add(response1.getServices().get(i).getService_name());
-                    }
-                }
-                Toast.makeText(Services.this, "a" +have_advance_services, Toast.LENGTH_SHORT).show();
-                ServicesAdapter servicesAdapter = new ServicesAdapter(Services.this, ServiceId, ServicesName, have_advance_services);
-                RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
-                rv_service.setLayoutManager(mLayoutManager);
-                rv_service.setItemAnimator(new DefaultItemAnimator());
-                rv_service.setAdapter(servicesAdapter);
 
+                if (response1 != null) {
+                    ServicesAdapter servicesAdapter = new ServicesAdapter(Services.this, response1, CatId, have_advance_services);
+                    RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+                    rv_service.setLayoutManager(mLayoutManager);
+                    rv_service.setItemAnimator(new DefaultItemAnimator());
+                    rv_service.setAdapter(servicesAdapter);
+                }
             }
 
             @Override
@@ -81,4 +76,9 @@ public class Services extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        CatId = Global.CatId;
+    }
 }

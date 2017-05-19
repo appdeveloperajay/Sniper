@@ -24,4 +24,6 @@ public interface RetroInterface {
     @GET("/fetch_category_advance_services.php")
     Call<AdvCategoryResp> getAdvCat(@Query("C_ID") String cid);
 
+
+
 }
