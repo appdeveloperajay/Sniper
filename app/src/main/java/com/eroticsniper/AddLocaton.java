@@ -1,14 +1,39 @@
 package com.eroticsniper;
 
+import android.Manifest;
+import android.annotation.TargetApi;
+import android.app.Activity;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.media.browse.MediaBrowser;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
+import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
-public class AddLocaton extends AppCompatActivity {
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+public class AddLocaton extends AppCompatActivity implements View.OnClickListener {
 
     private Button btn_mon, btn_tue, btn_wed, btn_thr, btn_fri, btn_sat, btn_sun, btn_next;
     private int str_sun = 0, str_mon = 0, str_tues = 0, str_wed = 0, str_thr = 0, str_fri = 0, str_sat = 0;
@@ -16,6 +41,20 @@ public class AddLocaton extends AppCompatActivity {
     private String Name, Email, input_Phone, input_website, input_description;
 
     String CatId = "0";
+    private Button btnSelect;
+    private ImageView ivImage;
+    private String userChoosenTask;
+    public static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 123;
+
+    de.hdodenhof.circleimageview.CircleImageView mainImage;
+    private ImageView Image1, Image2, Image3, Image4;
+
+    String Base64_Image = "";
+    static final int CAMERA_REQUEST = 1888;
+    int SELECT_FILE = 1;
+    Bitmap bitmap = null;
+    int SelectImageView = 0;
+    String mainimage = "", image1 = "", image2 = "", image3 = "", image4 = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +76,17 @@ public class AddLocaton extends AppCompatActivity {
         et_input_website = (EditText) findViewById(R.id.et_input_website);
         et_input_description = (EditText) findViewById(R.id.et_input_description);
 
+        mainImage = (de.hdodenhof.circleimageview.CircleImageView) findViewById(R.id.MainImage);
+        Image1 = (ImageView) findViewById(R.id.Image1);
+        Image2 = (ImageView) findViewById(R.id.Image2);
+        Image3 = (ImageView) findViewById(R.id.Image3);
+        Image4 = (ImageView) findViewById(R.id.Image4);
+
+        mainImage.setOnClickListener(this);
+        Image1.setOnClickListener(this);
+        Image2.setOnClickListener(this);
+        Image3.setOnClickListener(this);
+        Image4.setOnClickListener(this);
 
         btn_mon.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -173,5 +223,171 @@ public class AddLocaton extends AppCompatActivity {
                 }
             }
         });
+    }
+
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.MainImage:
+                selectImage();
+                SelectImageView = 0;
+                break;
+            case R.id.Image1:
+                selectImage();
+                SelectImageView = 1;
+                break;
+            case R.id.Image2:
+                selectImage();
+                SelectImageView = 2;
+                break;
+            case R.id.Image3:
+                selectImage();
+                SelectImageView = 3;
+                break;
+            case R.id.Image4:
+                selectImage();
+                SelectImageView = 4;
+                break;
+        }
+    }
+
+    protected void selectImage() {
+        final CharSequence[] items = {"Take Photo", "Choose from Library", "Cancel"};
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Add Photo!");
+        builder.setItems(items, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int item) {
+                if (items[item].equals("Take Photo")) {
+                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    startActivityForResult(intent, CAMERA_REQUEST);
+                } else if (items[item].equals("Choose from Library")) {
+                    Intent intent = new Intent(
+                            Intent.ACTION_PICK,
+                            MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    intent.setType("image/*");
+                    intent.setAction(Intent.ACTION_GET_CONTENT);
+                    startActivityForResult(
+                            Intent.createChooser(intent, "Select File"),
+                            SELECT_FILE);
+                } else if (items[item].equals("Cancel")) {
+                    dialog.dismiss();
+                }
+            }
+        });
+        builder.show();
+    }
+
+    private Bitmap onCaptureImageResult(Intent data) {
+        bitmap = (Bitmap) data.getExtras().get("data");
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
+        Base64_Image = Base64.encodeToString(bytes.toByteArray(), Base64.DEFAULT);
+        switch (SelectImageView) {
+            case 0: {
+                mainImage.setImageBitmap(bitmap);
+                mainimage = Base64_Image;
+                break;
+            }
+            case 1: {
+                Image1.setImageBitmap(bitmap);
+                image1 = Base64_Image;
+                break;
+            }
+            case 2: {
+                Image2.setImageBitmap(bitmap);
+                image2 = Base64_Image;
+                break;
+            }
+            case 3: {
+                Image3.setImageBitmap(bitmap);
+                image3 = Base64_Image;
+                break;
+            }
+            case 4: {
+                Image4.setImageBitmap(bitmap);
+                image4 = Base64_Image;
+                break;
+            }
+        }
+        File destination = new File(Environment.getExternalStorageDirectory(),
+                System.currentTimeMillis() + ".jpg");
+        FileOutputStream fo;
+        try {
+            destination.createNewFile();
+            fo = new FileOutputStream(destination);
+            fo.write(bytes.toByteArray());
+            fo.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return bitmap;
+    }
+
+    @SuppressWarnings("deprecation")
+    //image selection from image gallery
+    private Bitmap onSelectFromGalleryResult(Intent data) {
+        Uri uri = data.getData();
+        try {
+            bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+            ByteArrayOutputStream bytes2 = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 90, bytes2);
+
+            Base64_Image = Base64.encodeToString(bytes2.toByteArray(), Base64.DEFAULT);
+            switch (SelectImageView) {
+                case 0: {
+                    mainImage.setImageBitmap(bitmap);
+                    mainimage = Base64_Image;
+                    break;
+                }
+                case 1: {
+                    Image1.setImageBitmap(bitmap);
+                    image1 = Base64_Image;
+                    break;
+                }
+                case 2: {
+                    Image2.setImageBitmap(bitmap);
+                    image2 = Base64_Image;
+                    break;
+                }
+                case 3: {
+                    Image3.setImageBitmap(bitmap);
+                    image3 = Base64_Image;
+                    break;
+                }
+                case 4: {
+                    Image4.setImageBitmap(bitmap);
+                    image4 = Base64_Image;
+                    break;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return bitmap;
+    }
+
+    // image choosen result
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == SELECT_FILE) {
+                onSelectFromGalleryResult(data);
+            } else if (requestCode == CAMERA_REQUEST) {
+                onCaptureImageResult(data);
+            }
+        }
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
+        );
     }
 }

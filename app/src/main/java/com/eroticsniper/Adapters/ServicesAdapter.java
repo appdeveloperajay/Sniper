@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,6 +17,7 @@ import com.eroticsniper.AdvanceCategory;
 import com.eroticsniper.Beans.Retroresponse;
 import com.eroticsniper.Global;
 import com.eroticsniper.R;
+import com.eroticsniper.Services;
 
 import java.util.ArrayList;
 
@@ -47,19 +49,31 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.MyView
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(MyViewHolder holder, final int position) {
+
+        if (Global.SelectedServices.contains(response.getServices().get(position).getService_id().toString().trim())) {
+            holder.RL_service.setBackgroundColor(context.getResources().getColor(R.color.pink));
+        } else {
+            holder.RL_service.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.button_shape));
+        }
+
 
         holder.txt_category.setText(response.getServices().get(position).getService_name());
         holder.RL_service.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
-                if (Integer.parseInt(have_advance_services) == 1) {
-                    Intent i = new Intent().setClass(context, AdvanceCategory.class);
-                    context.startActivity(i);
+                if (Global.SelectedServices.contains(response.getServices().get(position).getService_id().toString().trim())) {
+
+                    for (int i = Global.SelectedServices.size() - 1; i >= 0; i--) {
+                        if (Integer.parseInt(Global.SelectedServices.get(i).toString().trim()) == Integer.parseInt(response.getServices().get(position).getService_id().toString().trim())) {
+                            Global.SelectedServices.remove(i);
+                        }
+                    }
                 } else {
-                    Intent i = new Intent().setClass(context, AddLocaton.class);
-                    context.startActivity(i);
+                    Global.SelectedServices.add(response.getServices().get(position).getService_id().toString());
                 }
+                notifyDataSetChanged();
             }
         });
     }
@@ -72,6 +86,7 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.MyView
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView txt_category;
         RelativeLayout RL_service;
+        LinearLayout fullrow;
 
         public MyViewHolder(View itemView) {
             super(itemView);

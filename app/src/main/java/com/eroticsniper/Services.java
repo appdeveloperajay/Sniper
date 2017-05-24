@@ -7,6 +7,8 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.eroticsniper.Adapters.ServicesAdapter;
@@ -29,21 +31,37 @@ public class Services extends AppCompatActivity {
     RecyclerView rv_service;
     String CatId = "0";
     String have_advance_services;
-
+    Button btn_add_new_location;
     Retroresponse response1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_services);
-        rv_service = (RecyclerView) findViewById(R.id.rv_service);
 
         CatId = Global.CatId;
         have_advance_services = Global.HaveAdvanceServices;
 
-        Log.d(TAG, "CatId:-" + CatId);
-        Log.d(TAG, "have_advance_services:-" + have_advance_services);
+        rv_service = (RecyclerView) findViewById(R.id.rv_service);
+        btn_add_new_location = (Button) findViewById(R.id.btn_add_new_location);
+        btn_add_new_location.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+                if (Global.SelectedServices.size() <= 0) {
+                    Toast.makeText(Services.this, "Please select atleast one Service", Toast.LENGTH_SHORT).show();
+                } else {
+                    if (Integer.parseInt(have_advance_services) == 1) {
+                        Intent i = new Intent().setClass(Services.this, AdvanceCategory.class);
+                        startActivity(i);
+                    } else {
+                        Intent i = new Intent().setClass(Services.this, AddLocaton.class);
+                        startActivity(i);
+                    }
+                }
+            }
+        });
         retrofit();
     }
 

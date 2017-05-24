@@ -47,7 +47,7 @@ public class AdvaceServiceDialogAdapter extends RecyclerView.Adapter<AdvaceServi
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
 
-        if (AdvanceCategory.selectedIds.contains(Integer.parseInt(advCategoryResp.getFilter().get(pos).getAdv_service_options().get(position).getOption_id()))) {
+        if (Global.selectedIds.contains(Integer.parseInt(advCategoryResp.getFilter().get(pos).getAdv_service_options().get(position).getOption_id()))) {
 //            Log.d("arraylistscategory", "true" + advCategoryResp.getFilter().get(position).getAdv_service_id());
             holder.checkbox.setChecked(true);
         } else {
@@ -61,20 +61,20 @@ public class AdvaceServiceDialogAdapter extends RecyclerView.Adapter<AdvaceServi
             @Override
             public void onClick(View view) {
                 if (holder.checkbox.isChecked() == true) {
-                    if (AdvanceCategory.selectedIds.contains(Integer.parseInt(advCategoryResp.getFilter().get(pos).getAdv_service_options().get(position).getOption_id()))) {
-                        Log.d("arraylistscategory", "contains"+ AdvanceCategory.selectedIds.size() );
-                        for (int i = AdvanceCategory.selectedIds.size() - 1; i >= 0; i--) {
-                            Log.d("arraylistscategory", "id array " + AdvanceCategory.selectedIds.get(i)+" selected "+advCategoryResp.getFilter().get(pos).getAdv_service_options().get(position).getOption_id());
-                            if (AdvanceCategory.selectedIds.get(i) == Integer.parseInt(advCategoryResp.getFilter().get(pos).getAdv_service_options().get(position).getOption_id()))
+                    if (Global.selectedIds.contains(Integer.parseInt(advCategoryResp.getFilter().get(pos).getAdv_service_options().get(position).getOption_id()))) {
+                        Log.d("arraylistscategory", "contains"+ Global.selectedIds.size() );
+                        for (int i = Global.selectedIds.size() - 1; i >= 0; i--) {
+                            Log.d("arraylistscategory", "id array " + Global.selectedIds.get(i)+" selected "+advCategoryResp.getFilter().get(pos).getAdv_service_options().get(position).getOption_id());
+                            if (Global.selectedIds.get(i) == Integer.parseInt(advCategoryResp.getFilter().get(pos).getAdv_service_options().get(position).getOption_id()))
                             {
-                                AdvanceCategory.selectedIds.remove(i);
+                                Global.selectedIds.remove(i);
                             }
                         }
 
                     }
 
                 } else {
-                    AdvanceCategory.selectedIds.add(Integer.parseInt(advCategoryResp.getFilter().get(pos).getAdv_service_options().get(position).getOption_id()));
+                    Global.selectedIds.add(Integer.parseInt(advCategoryResp.getFilter().get(pos).getAdv_service_options().get(position).getOption_id()));
                 }
                 notifyDataSetChanged();
 

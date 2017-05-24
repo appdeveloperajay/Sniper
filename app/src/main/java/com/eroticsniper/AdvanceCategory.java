@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.eroticsniper.Adapters.AdvanceServiceAdapter;
@@ -33,8 +34,8 @@ public class AdvanceCategory extends AppCompatActivity {
     RecyclerView rv_advance_service;
     AdvCategoryResp advCategoryResp;
     String Catid;
-    public static ArrayList<Integer> selectedIds = new ArrayList<Integer>();
     Button btn_add_new_location;
+    LinearLayout back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +53,13 @@ public class AdvanceCategory extends AppCompatActivity {
         });
         rv_advance_service = (RecyclerView) findViewById(R.id.rv_advance_service);
         Catid = Global.CatId;
-        Log.d(TAG, "" + Catid);
+        back = (LinearLayout) findViewById(R.id.back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         retrofit();
     }
 

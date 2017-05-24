@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,13 +7,27 @@
     android:background="@color/bagroundcolor"
     tools:context="com.eroticsniper.Categories">
 
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_service"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_above="@+id/btn_add_new_location"
+        android:layout_below="@id/toolbar"
+        android:layout_marginTop="5dp" />
 
 
-    </android.support.v7.widget.RecyclerView>
-
-
-</LinearLayout>
+    <Button
+        android:id="@+id/btn_add_new_location"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="5dp"
+        android:background="@color/PINK"
+        android:text="@string/Next"
+        android:textStyle="bold"
+        android:textColor="@color/WHITE" />
+</RelativeLayout>
