@@ -226,6 +226,7 @@ public class AddLocaton extends AppCompatActivity implements View.OnClickListene
     }
 
 
+
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
